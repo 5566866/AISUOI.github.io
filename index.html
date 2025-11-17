@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AISUO 在线咨询</title>
+  <style>
+    /* 全局重置：全屏+高端简约基调 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* 隐藏滚动条，确保全屏 */
+      background-color: #f9f9f9;
+      color: #111;
+    }
+
+    /* 咨询窗口容器：铺满全屏 */
+    .chat-container {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 顶部导航栏（含返回按钮+1:1头像） */
+    .chat-header {
+      padding: 16px 20px;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    /* 返回主页按钮：固定样式，无悬浮效果 */
+    .back-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    /* 1:1 客服头像 */
+    .chat-avatar {
+      width: 40px;
+      height: 40px; /* 严格1:1比例 */
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .chat-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .chat-title-wrap {
+      flex: 1;
+    }
+    .chat-title {
+      font-size: 17px;
+      font-weight: 500;
+    }
+    .chat-status {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* 聊天内容区域：占满中间高度 */
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    /* 客服消息 */
+    .service-message {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .service-msg-content {
+      background-color: #fff;
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      max-width: 70%;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    /* 用户消息 */
+    .user-message {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    .user-msg-content {
+      background-color: #111;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 12px;
+      max-width: 70%;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* 输入区域：固定底部 */
+    .chat-input-area {
+      padding: 16px 20px;
+      background-color: #fff;
+      border-top: 1px solid #eee;
+      display: flex;
+      gap: 10px;
+    }
+    .chat-input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 1px solid #eee;
+      border-radius: 28px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none; /* 清除默认样式 */
+    }
+    .chat-input:focus {
+      border-color: #111;
+    }
+    .chat-send-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #111;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      -webkit-appearance: none;
+    }
+
+    /* 适配平板/桌面端全屏显示 */
+    @media (min-width: 768px) {
+      .chat-avatar {
+        width: 44px;
+        height: 44px;
+      }
+      .chat-title {
+        font-size: 18px;
+      }
+      .chat-input {
+        font-size: 16px;
+        padding: 16px 18px;
+      }
+      .chat-send-btn {
+        width: 52px;
+        height: 52px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 咨询窗口主体：铺满全屏 -->
+  <div class="chat-container">
+    <!-- 顶部导航（返回按钮+1:1头像） -->
+    <div class="chat-header">
+      <a href="https://5566866.github.io/" class="back-btn">← 返回主页</a>
+      <div class="chat-avatar">
+        <img src="Screenshot_20251026_182422_com.smile.gifmaker_edit_254998907670985.jpg" alt="AISUO客服">
+      </div>
+      <div class="chat-title-wrap">
+        <div class="chat-title">AISUO 在线客服</div>
+        <div class="chat-status">工作日 9:00-21:00 在线</div>
+      </div>
+    </div>
+
+    <!-- 聊天内容：占满中间区域 -->
+    <div class="chat-messages">
+      <div class="service-message">
+        <div class="chat-avatar" style="width: 36px; height: 36px;">
+          <img src="Screenshot_20251026_182422_com.smile.gifmaker_edit_254998907670985.jpg" alt="客服">
+        </div>
+        <div class="service-msg-content">
+          您好！欢迎咨询 AISUO 产品相关问题，我会为您提供专业解答~
+        </div>
+      </div>
+    </div>
+
+    <!-- 输入区域：固定底部 -->
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" placeholder="请输入您的问题...">
+      <button class="chat-send-btn">→</button>
+    </div>
+  </div>
+
+  <!-- 交互脚本（功能完整） -->
+  <script>
+    const input = document.querySelector('.chat-input');
+    const sendBtn = document.querySelector('.chat-send-btn');
+    const messagesContainer = document.querySelector('.chat-messages');
+
+    // 发送消息功能
+    function sendMessage() {
+      const content = input.value.trim();
+      if (!content) return;
+
+      // 创建用户消息
+      const userMsg = document.createElement('div');
+      userMsg.className = 'user-message';
+      userMsg.innerHTML = `<div class="user-msg-content">${content}</div>`;
+      messagesContainer.appendChild(userMsg);
+
+      // 清空输入框并滚动到底部
+      input.value = '';
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      // 模拟客服自动回复（2秒延迟）
+      setTimeout(() => {
+        const serviceReply = document.createElement('div');
+        serviceReply.className = 'service-message';
+        serviceReply.innerHTML = `
+          <div class="chat-avatar" style="width: 36px; height: 36px;">
+            <img src="Screenshot_20251026_182422_com.smile.gifmaker_edit_254998907670985.jpg" alt="客服">
+          </div>
+          <div class="service-msg-content">感谢您的咨询，我们会尽快为您处理~</div>
+        `;
+        messagesContainer.appendChild(serviceReply);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }, 2000);
+    }
+
+    // 点击发送按钮
+    sendBtn.addEventListener('click', sendMessage);
+
+    // 回车发送
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // 禁止页面缩放（适配移动设备）
+    document.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+  </script>
+</body>
+</html>
